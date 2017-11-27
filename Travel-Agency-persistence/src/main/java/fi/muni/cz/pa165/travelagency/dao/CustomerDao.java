@@ -39,8 +39,9 @@ public interface CustomerDao {
     /**
      * Updates Customer
      * @param customer Customer
+     * @return customer
      */
-    void update(Customer customer);
+    Customer update(Customer customer);
 
     /**
      * Finds customers based on reservation

@@ -4,6 +4,7 @@ import fi.muni.cz.pa165.travelagency.dao.CustomerDao;
 import fi.muni.cz.pa165.travelagency.entity.Customer;
 import fi.muni.cz.pa165.travelagency.entity.Excursion;
 import fi.muni.cz.pa165.travelagency.entity.Reservation;
+import fi.muni.cz.pa165.travelagency.enums.PaymentStateType;
 import fi.muni.cz.pa165.travelagency.exceptions.TravelAgencyServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,7 @@ public class CustomerServiceImpl implements CustomerService {
     private ReservationService reservationService;
 
     @Override
-    public void create(Customer customer) {
+    public void createCustomer(Customer customer) {
         try {
             customerDao.create(customer);
         } catch (NullPointerException npe){
@@ -59,7 +60,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void changeCustomerOnReservation(Customer newCustomer, Reservation reservation) {
+    public Customer changeCustomerOnReservation(Customer newCustomer, Reservation reservation) {
         try {
             Customer oldCustomer = reservation.getCustomer();
             oldCustomer.removeReservation(reservation);
@@ -69,7 +70,7 @@ public class CustomerServiceImpl implements CustomerService {
             reservationService.updateReservation(reservation);
 
             newCustomer.addReservation(reservation);
-            customerDao.update(newCustomer);
+            return customerDao.update(newCustomer);
         } catch (NullPointerException npe){
             throw npe;
         } catch (Exception e) {
@@ -83,11 +84,14 @@ public class CustomerServiceImpl implements CustomerService {
             List<Reservation> reservationList =  reservationService.findByCustomer(customer);
             BigDecimal totalSum = BigDecimal.ZERO;
             for (Reservation reservation: reservationList) {
-                totalSum.add(reservation.getReservedTrip().getPrice());
+                if (reservation.getPaymentState() != PaymentStateType.Paid) {
+                    continue;
+                }
+                totalSum = totalSum.add(reservation.getReservedTrip().getPrice());
 
                 if (reservation.getReservedExcursions() != null) {
                     for (Excursion excursion: reservation.getReservedExcursions()) {
-                        totalSum.add(excursion.getPrice());
+                        totalSum = totalSum.add(excursion.getPrice());
                     }
                 }
             }
@@ -101,7 +105,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void remove(Customer customer) {
+    public void removeCustomer(Customer customer) {
         try {
             customerDao.remove(customer);
         } catch (NullPointerException npe){
@@ -112,9 +116,9 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void update(Customer customer) {
+    public Customer updateCustomer(Customer customer) {
         try {
-            customerDao.update(customer);
+            return customerDao.update(customer);
         } catch (NullPointerException npe){
             throw npe;
         } catch (Exception e){

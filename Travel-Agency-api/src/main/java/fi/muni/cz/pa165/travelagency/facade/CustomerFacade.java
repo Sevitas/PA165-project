@@ -75,6 +75,7 @@ public interface CustomerFacade {
      * Changes customer on reservation
      * @param customerDTO CustomerDTO
      * @param reservationDTO ReservationDTO
+     * @return Customer
      */
-    void changeCustomerOnReservation(CustomerDTO customerDTO, ReservationDTO reservationDTO);
+    CustomerDTO changeCustomerOnReservation(CustomerDTO customerDTO, ReservationDTO reservationDTO);
 }

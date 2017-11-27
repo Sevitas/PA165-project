@@ -1,7 +1,8 @@
-package fi.muni.cz.pa165.travelagency.service;
+package fi.muni.cz.pa165.travelagency.service.service;
 
 import fi.muni.cz.pa165.travelagency.dto.CustomerDTO;
 import fi.muni.cz.pa165.travelagency.entity.Customer;
+import fi.muni.cz.pa165.travelagency.service.BeanMappingService;
 import fi.muni.cz.pa165.travelagency.service.config.ServiceConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -14,6 +15,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+/**
+ * @author Martin Sevcik
+ */
 @ContextConfiguration(classes = ServiceConfiguration.class)
 public class BeanMappingServiceTest extends AbstractTestNGSpringContextTests {
 

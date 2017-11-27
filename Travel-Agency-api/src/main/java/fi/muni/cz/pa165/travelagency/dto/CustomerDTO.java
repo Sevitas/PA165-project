@@ -2,6 +2,7 @@ package fi.muni.cz.pa165.travelagency.dto;
 
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -49,6 +50,13 @@ public class CustomerDTO {
      * Reservations of customer
      */
     private Set<ReservationDTO> reservations;
+
+    /**
+     * Non parametric constructor
+     */
+    public CustomerDTO() {
+        this.reservations = new HashSet<>();
+    }
 
     public Long getId() {
         return id;
@@ -112,15 +120,6 @@ public class CustomerDTO {
 
     public void setReservations(Set<ReservationDTO> reservations) {
         this.reservations = reservations;
-    }
-
-    /**
-     * Removes reservation from reservations
-     * @param reservationDTO ReservationDTO
-     * @return true if reservations contained reservation
-     */
-    public Boolean removeReservation(ReservationDTO reservationDTO) {
-        return this.reservations.remove(reservationDTO);
     }
 
     /**

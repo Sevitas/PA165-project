@@ -70,7 +70,7 @@ public class ReservationFacadeImpl implements ReservationFacade {
         }
         
         customer.addReservation(newReservation);
-        customerService.update(customer);
+        customerService.updateCustomer(customer);
         reservationService.createReservation(newReservation);
         return newReservation.getId();
     }

@@ -1,14 +1,15 @@
-package fi.muni.cz.pa165.travelagency.service;
+package fi.muni.cz.pa165.travelagency.service.service;
 
 import fi.muni.cz.pa165.travelagency.dao.ExcursionDao;
 import fi.muni.cz.pa165.travelagency.entity.Customer;
 import fi.muni.cz.pa165.travelagency.entity.Excursion;
 import fi.muni.cz.pa165.travelagency.entity.Reservation;
 import fi.muni.cz.pa165.travelagency.entity.Trip;
+import fi.muni.cz.pa165.travelagency.service.ExcursionService;
 import fi.muni.cz.pa165.travelagency.service.config.ServiceConfiguration;
 import java.math.BigDecimal;
 import java.util.Calendar;
-import java.util.Date;
+
 import org.hibernate.service.spi.ServiceException;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -22,7 +23,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
 
 /**
- * Excursion Service Tests for the Travel Angecy project.
+ * Excursion service Tests for the Travel Angecy project.
  * 
  * @author (name = "Nermin Jukan", UCO = "<473370>")
  */

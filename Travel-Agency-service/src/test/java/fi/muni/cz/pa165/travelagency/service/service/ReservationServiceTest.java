@@ -1,10 +1,11 @@
-package fi.muni.cz.pa165.travelagency.service;
+package fi.muni.cz.pa165.travelagency.service.service;
 
 import fi.muni.cz.pa165.travelagency.dao.ReservationDao;
 import fi.muni.cz.pa165.travelagency.entity.Customer;
 import fi.muni.cz.pa165.travelagency.entity.Excursion;
 import fi.muni.cz.pa165.travelagency.entity.Reservation;
 import fi.muni.cz.pa165.travelagency.entity.Trip;
+import fi.muni.cz.pa165.travelagency.service.ReservationService;
 import fi.muni.cz.pa165.travelagency.service.config.ServiceConfiguration;
 import java.math.BigDecimal;
 import java.sql.Date;
@@ -19,7 +20,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 /**
  * @author Radoslav Micko <445611>

@@ -17,7 +17,7 @@ public interface CustomerService {
      * Create operation for CustomerDao
      * @param customer Customer
      */
-    void create(Customer customer);
+    void createCustomer(Customer customer);
 
     /**
      * Finds all Customers
@@ -36,13 +36,14 @@ public interface CustomerService {
      * Removes Customer
      * @param customer Customer
      */
-    void remove(Customer customer);
+    void removeCustomer(Customer customer);
 
     /**
      * Updates Customer
      * @param customer Customer
+     * @return customer
      */
-    void update(Customer customer);
+    Customer updateCustomer(Customer customer);
 
     /**
      * Finds customers based on reservation
@@ -76,6 +77,7 @@ public interface CustomerService {
      * Changes customer on reservation
      * @param customer Customer
      * @param reservation Reservation
+     * @return Customer
      */
-    void changeCustomerOnReservation(Customer customer, Reservation reservation);
+    Customer changeCustomerOnReservation(Customer customer, Reservation reservation);
 }
