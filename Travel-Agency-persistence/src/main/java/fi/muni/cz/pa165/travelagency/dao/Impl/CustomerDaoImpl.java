@@ -6,6 +6,7 @@ import fi.muni.cz.pa165.travelagency.entity.Reservation;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
@@ -47,20 +48,44 @@ public class CustomerDaoImpl implements CustomerDao {
 
     @Override
     public Customer findByReservation(Reservation reservation){
-        return em.createQuery("select c from Customer c join c.reservations r" +
-                " where r.id = :reservationId", Customer.class)
-                .setParameter("reservationId", reservation.getId()).getSingleResult();
+        if (reservation == null) {
+            throw new IllegalArgumentException("reservation is null");
+        }
+
+        try {
+            return em.createQuery("select c from Customer c join c.reservations r" +
+                    " where r.id = :reservationId", Customer.class)
+                    .setParameter("reservationId", reservation.getId()).getSingleResult();
+        } catch (NoResultException nre) {
+            return null;
+        }
     }
 
     @Override
     public Customer findByIdCardNumber(String idCardNumber) {
-        return em.createQuery("select c from Customer c where c.idCardNumber = :idCardNumber", Customer.class)
-                .setParameter("idCardNumber", idCardNumber).getSingleResult();
+        if (idCardNumber == null || idCardNumber.isEmpty()) {
+            throw new IllegalArgumentException("idCardNumber is null or empty");
+        }
+
+        try{
+            return em.createQuery("select c from Customer c where c.idCardNumber = :idCardNumber", Customer.class)
+                    .setParameter("idCardNumber", idCardNumber).getSingleResult();
+        } catch (NoResultException nre) {
+            return null;
+        }
     }
 
     @Override
     public Customer findByEmail(String email) {
-        return em.createQuery("select c from Customer c where c.email = :email", Customer.class)
-                .setParameter("email", email).getSingleResult();
+        if (email == null || email.isEmpty()) {
+            throw new IllegalArgumentException("email is null or empty");
+        }
+
+        try {
+            return em.createQuery("select c from Customer c where c.email = :email", Customer.class)
+                    .setParameter("email", email).getSingleResult();
+        } catch (NoResultException nre) {
+            return null;
+        }
     }
 }
