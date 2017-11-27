@@ -9,6 +9,7 @@ import fi.muni.cz.pa165.travelagency.enums.PaymentStateType;
 import fi.muni.cz.pa165.travelagency.service.CustomerService;
 import fi.muni.cz.pa165.travelagency.service.ReservationService;
 import fi.muni.cz.pa165.travelagency.service.config.ServiceConfiguration;
+import org.junit.rules.ExpectedException;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -120,7 +121,7 @@ public class CustomerServiceTest extends AbstractTestNGSpringContextTests {
     public void updateCustomer() {
         customer.setName("x");
         customerService.updateCustomer(customer);
-        verify(customerDao, times(2)).update(customer);
+        verify(customerDao, times(3)).update(customer);
     }
 
     @Test
@@ -128,6 +129,12 @@ public class CustomerServiceTest extends AbstractTestNGSpringContextTests {
         when(reservationService.findByCustomer(customer)).thenReturn(Arrays.asList(reservation, reservationNew));
         assertEquals(customerService.getTotalPriceCustomersReservations(customer), new BigDecimal("300"),
                 "Price equality, price should be ");
+    }
+
+    @Test(expectedExceptions = NullPointerException.class)
+    public void getTotalPriceCustomersReservationsCustomerNull() {
+        when(reservationService.findByCustomer(any())).thenReturn(null);
+        customerService.getTotalPriceCustomersReservations(customer);
     }
 
     @Test
@@ -142,6 +149,16 @@ public class CustomerServiceTest extends AbstractTestNGSpringContextTests {
         Assert.assertNotEquals(reservationNew.getCustomer().getId(), customer.getId(), "Id non equality");
         Assert.assertEquals(reservationNew.getCustomer().getId(), customerNew.getId());
         customerEqualsTest(reservationNew.getCustomer(), customerNew);
+    }
+
+    @Test(expectedExceptions = NullPointerException.class)
+    public void changeCustomerOnReservationCustomerNullCustomer() {
+        customerService.changeCustomerOnReservation(null, reservation);
+    }
+
+    @Test(expectedExceptions = NullPointerException.class)
+    public void changeCustomerOnReservationCustomerNullReservation() {
+        customerService.changeCustomerOnReservation(customer, null);
     }
 
     @Test
