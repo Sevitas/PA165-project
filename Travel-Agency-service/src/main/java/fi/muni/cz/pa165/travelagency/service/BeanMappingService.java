@@ -27,7 +27,7 @@ public interface BeanMappingService {
      * @param u object
      * @param mapToClass desired class
      * @param <T> Type
-     * @return mapped object
+     * @return mapped object, or null if u is null
      */
     <T> T mapTo(Object u, Class<T> mapToClass);
 

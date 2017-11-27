@@ -28,7 +28,7 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public Reservation createReservation(Reservation reservation) {
         if (reservation.getReservedTrip().getAvailableSpots() == 0) {
-            throw new TravelAgencyServiceException("Cannot create new "
+            throw new TravelAgencyServiceException("Cannot createCustomer new "
                     + "reservation. There is no more free slot for this trip.");
         }
         Trip trip = tripService.findTripWithId(reservation.getReservedTrip().getId());

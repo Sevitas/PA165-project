@@ -40,8 +40,6 @@ public class CustomerServiceImpl implements CustomerService {
     public List<Customer> findAll() {
        try {
             return customerDao.findAll();
-       } catch (NullPointerException npe){
-           throw npe;
        } catch (Exception e){
            throw new TravelAgencyServiceException(e);
        }

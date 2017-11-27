@@ -1,6 +1,5 @@
 package fi.muni.cz.pa165.travelagency.service.facade;
 
-import fi.muni.cz.pa165.travelagency.dao.CustomerDao;
 import fi.muni.cz.pa165.travelagency.dto.CustomerDTO;
 import fi.muni.cz.pa165.travelagency.dto.ReservationDTO;
 import fi.muni.cz.pa165.travelagency.dto.TripDTO;
@@ -181,7 +180,7 @@ public class CustomerFacadeTest extends AbstractTestNGSpringContextTests {
     @Test
     public void createCustomer() {
         when(beanMappingService.mapTo(customerDTO, Customer.class)).thenReturn(customer);
-        customerFacade.create(customerDTO);
+        customerFacade.createCustomer(customerDTO);
         verify(customerService).createCustomer(customer);
     }
 
@@ -190,7 +189,7 @@ public class CustomerFacadeTest extends AbstractTestNGSpringContextTests {
         customer.setId(1L);
         customerDTO.setId(1L);
         when(beanMappingService.mapTo(customerDTO, Customer.class)).thenReturn(customer);
-        customerFacade.update(customerDTO);
+        customerFacade.updateCustomer(customerDTO);
         verify(customerService).updateCustomer(customer);
     }
 
@@ -199,7 +198,7 @@ public class CustomerFacadeTest extends AbstractTestNGSpringContextTests {
         customer.setId(1L);
         customerDTO.setId(1L);
         when(beanMappingService.mapTo(customerDTO, Customer.class)).thenReturn(customer);
-        customerFacade.remove(customerDTO);
+        customerFacade.removeCustomer(customerDTO);
         verify(customerService).removeCustomer(customer);
     }
 
@@ -207,7 +206,7 @@ public class CustomerFacadeTest extends AbstractTestNGSpringContextTests {
     public void getTotalPriceCustomersReservationsCustomer() {
         when(beanMappingService.mapTo(customerDTO, Customer.class)).thenReturn(customer);
         when(customerService.getTotalPriceCustomersReservations(customer)).thenReturn(new BigDecimal("300"));
-        Assert.assertEquals(customerService.getTotalPriceCustomersReservations(customer), new BigDecimal("300")
+        Assert.assertEquals(customerFacade.getTotalPriceCustomersReservations(customerDTO), new BigDecimal("300")
                 , "returned value should be 300");
     }
 

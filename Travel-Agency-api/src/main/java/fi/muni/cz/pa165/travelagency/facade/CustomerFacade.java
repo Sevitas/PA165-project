@@ -15,8 +15,9 @@ public interface CustomerFacade {
     /**
      * Create operation for CustomerDao
      * @param customerDTO CustomerDTO
+     * @throws IllegalArgumentException if customerDTO is null or mapped customerDTO is null
      */
-    void create(CustomerDTO customerDTO);
+    void createCustomer(CustomerDTO customerDTO);
 
     /**
      * Finds all Customers
@@ -34,18 +35,21 @@ public interface CustomerFacade {
     /**
      * Removes Customer
      * @param customerDTO CustomerDTO
+     * @throws IllegalArgumentException if customerDTO is null or mapped customerDTO is null
      */
-    void remove(CustomerDTO customerDTO);
+    void removeCustomer(CustomerDTO customerDTO);
 
     /**
      * Updates Customer
      * @param customerDTO CustomerDTO
+     * @throws IllegalArgumentException if customerDTO is null or mapped customerDTO is null
      */
-    void update(CustomerDTO customerDTO);
+    void updateCustomer(CustomerDTO customerDTO);
 
     /**
      * Finds customers based on reservation
      * @param reservationDTO ReservationDTO
+     * @throws IllegalArgumentException if reservationDTO is null or mapped reservationDTO is null
      * @return CustomerDTO
      */
     CustomerDTO findByReservation(ReservationDTO reservationDTO);
@@ -67,6 +71,7 @@ public interface CustomerFacade {
     /**
      * Sums all customers expenses
      * @param customerDTO CustomerDTO
+     * @throws IllegalArgumentException if customerDTO is null or mapped customerDTO is null
      * @return total expenses
      */
     BigDecimal getTotalPriceCustomersReservations(CustomerDTO customerDTO);
@@ -75,6 +80,7 @@ public interface CustomerFacade {
      * Changes customer on reservation
      * @param customerDTO CustomerDTO
      * @param reservationDTO ReservationDTO
+     * @throws IllegalArgumentException if customerDTO is null or mapped customerDTO is null
      * @return Customer
      */
     CustomerDTO changeCustomerOnReservation(CustomerDTO customerDTO, ReservationDTO reservationDTO);

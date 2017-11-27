@@ -1,4 +1,4 @@
-package fi.muni.cz.pa165.travelagency.service.service;
+package fi.muni.cz.pa165.travelagency.service;
 
 import fi.muni.cz.pa165.travelagency.dao.CustomerDao;
 import fi.muni.cz.pa165.travelagency.entity.Customer;

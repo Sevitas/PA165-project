@@ -15,12 +15,15 @@ import java.util.List;
 public interface CustomerService {
     /**
      * Create operation for CustomerDao
+     * @throws NullPointerException when NullPointerException occurs
+     * @throws TravelAgencyServiceException if some error occurs
      * @param customer Customer
      */
     void createCustomer(Customer customer);
 
     /**
      * Finds all Customers
+     * @throws TravelAgencyServiceException if some error occurs
      * @return Customer's list
      */
     List<Customer> findAll();
@@ -28,6 +31,8 @@ public interface CustomerService {
     /**
      * Finds specified customer
      * @param id id of customer
+     * @throws NullPointerException when NullPointerException occurs
+     * @throws TravelAgencyServiceException if some error occurs
      * @return Customer
      */
     Customer findById(Long id);
@@ -41,6 +46,8 @@ public interface CustomerService {
     /**
      * Updates Customer
      * @param customer Customer
+     * @throws NullPointerException when NullPointerException occurs
+     * @throws TravelAgencyServiceException if some error occurs
      * @return customer
      */
     Customer updateCustomer(Customer customer);
@@ -48,6 +55,8 @@ public interface CustomerService {
     /**
      * Finds customers based on reservation
      * @param reservation Reservation
+     * @throws NullPointerException when NullPointerException occurs
+     * @throws TravelAgencyServiceException if some error occurs
      * @return Customer
      */
     Customer findByReservation(Reservation reservation);
@@ -55,6 +64,8 @@ public interface CustomerService {
     /**
      * Finds Customer by id card number
      * @param idCardNumber id card number
+     * @throws NullPointerException when NullPointerException occurs
+     * @throws TravelAgencyServiceException if some error occurs
      * @return Customer
      */
     Customer findByIdCardNumber(String idCardNumber);
@@ -62,6 +73,8 @@ public interface CustomerService {
     /**
      * Finds Customer by email
      * @param email email
+     * @throws NullPointerException when NullPointerException occurs
+     * @throws TravelAgencyServiceException if some error occurs
      * @return Customer
      */
     Customer findByEmail(String email);
@@ -69,6 +82,8 @@ public interface CustomerService {
     /**
      * Sums all customers expenses
      * @param customer Customer
+     * @throws NullPointerException when NullPointerException occurs
+     * @throws TravelAgencyServiceException if some error occurs
      * @return total expenses
      */
     BigDecimal getTotalPriceCustomersReservations(Customer customer);
@@ -77,6 +92,8 @@ public interface CustomerService {
      * Changes customer on reservation
      * @param customer Customer
      * @param reservation Reservation
+     * @throws NullPointerException when NullPointerException occurs
+     * @throws TravelAgencyServiceException if some error occurs
      * @return Customer
      */
     Customer changeCustomerOnReservation(Customer customer, Reservation reservation);

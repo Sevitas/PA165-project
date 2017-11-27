@@ -37,7 +37,7 @@ public interface TripService {
     
     /**
      * Removes given excursion from given trip.
-     * @param trip trip to remove excursion from
+     * @param trip trip to removeCustomer excursion from
      * @param excursion excursion to be removed from trip
      */
     void removeExcursion(Trip trip, Excursion excursion);
