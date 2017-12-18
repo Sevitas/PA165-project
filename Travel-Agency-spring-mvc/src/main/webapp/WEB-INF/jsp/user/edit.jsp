@@ -36,12 +36,6 @@
                         <td><form:input id="email" name="email" path="email" type="email" value="${user.email}"/></td>
                     </tr>
                     <tr>
-
-                        <td><label for="birthDate" ><fmt:message key="user.edit.birthDate"/></label></td>
-                        <c:set var="now" value=">%=new java.util.Date()%>"/>
-                        <td><input id="birthDate" placeholder="dd.MM.yyyy" name="birthDate" path="birthDate" type="text" value="${birthDate}" /></td>
-                    </tr>
-                    <tr>
                         <td>
                             <a href="${pageContext.request.contextPath}/reservation/list/${user.id}" class="btn btn-primary"><fmt:message key="reservations"/></a>
                         </td>

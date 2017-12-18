@@ -45,7 +45,7 @@ public class UserController {
                        RedirectAttributes redirectAttributes,
                        HttpServletRequest req) {
         LOGGER.info("GET request: /user/view/{}", id);
-        if (!isAuthenticated(req, false)) {
+        if (!isAuthenticated(req, null, false)) {
             return AUTH_PAGE_URL;
         }
 
@@ -63,12 +63,15 @@ public class UserController {
      * Gets list of users
      * @param model model
      * @param req request
+     * @param redirectAttributes redirect attributes
      * @return list of users page
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(Model model,
-                       HttpServletRequest req) {
-        if (!isAuthenticated(req, true)) {
+                       HttpServletRequest req,
+                       RedirectAttributes redirectAttributes) {
+        if (!isAuthenticated(req, redirectAttributes, true)) {
+
             return AUTH_PAGE_URL;
         }
 
@@ -88,7 +91,7 @@ public class UserController {
     public String remove(@PathVariable Long id,
                          RedirectAttributes redirectAttributes,
                          HttpServletRequest req) {
-        if (!isAuthenticated(req, true)) {
+        if (!isAuthenticated(req, redirectAttributes, true)) {
             return AUTH_PAGE_URL;
         }
 
@@ -123,7 +126,7 @@ public class UserController {
                            RedirectAttributes redirectAttributes,
                            HttpServletRequest req,
                            Model model) {
-        if (!isAuthenticated(req, false)) {
+        if (!isAuthenticated(req, null, false)) {
             return AUTH_PAGE_URL;
         }
 
@@ -152,7 +155,7 @@ public class UserController {
                              @PathVariable Long id,
                              HttpServletRequest req,
                              RedirectAttributes redirectAttributes) {
-        if (!isAuthenticated(req, false)) {
+        if (!isAuthenticated(req, null, false)) {
             return AUTH_PAGE_URL;
         }
 
@@ -218,12 +221,18 @@ public class UserController {
     /**
      * Checks whether user is authenticated
      * @param req request
+     * @param redirectAttributes redirect attributes
      * @param shouldBeAdmin should Be Admin
      * @return user view
      */
-    private Boolean isAuthenticated(HttpServletRequest req, Boolean shouldBeAdmin) {
+    private Boolean isAuthenticated(HttpServletRequest req, RedirectAttributes redirectAttributes,
+                                    Boolean shouldBeAdmin) {
         UserDTO authUser = (UserDTO) req.getSession().getAttribute("authenticatedUser");
         if (authUser == null) {
+            if (redirectAttributes != null) {
+                redirectAttributes.addFlashAttribute("alert_danger", "Admin role required");
+            }
+
             LOGGER.error("user should be authenticated or admin for this operation");
             return false;
         }
