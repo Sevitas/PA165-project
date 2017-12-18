@@ -57,7 +57,7 @@ public class ReservationFacadeImpl implements ReservationFacade {
         
         Reservation newReservation = new Reservation();
         newReservation.setUser(user);
-        newReservation.setReservedTrip(trip);
+        newReservation.setTrip(trip);
         newReservation.setCreated(reservation.getDate());
         if (reservation.getExcursionsId() != null) {
             for (Long excursionId : reservation.getExcursionsId()) {
@@ -78,19 +78,13 @@ public class ReservationFacadeImpl implements ReservationFacade {
     public void updateReservation(ReservationDTO reservation) {
         Reservation newReservation = beanMappingService.mapTo(
                 reservation, Reservation.class);
-        
-        newReservation.setUser(
-                beanMappingService.mapTo(reservation.getUser(), User.class));
-        
-        newReservation.addAllReservedExcursions(beanMappingService.
-                mapTo(reservation.getExcursions(), Excursion.class));
-        
+
         reservationService.updateReservation(newReservation);
     }
 
     @Override
     public void removeReservation(Long reservationId) {
-        reservationService.removeReservation(new Reservation(reservationId));
+        reservationService.removeReservation(reservationService.findById(reservationId));
     }
 
     @Override

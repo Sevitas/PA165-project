@@ -18,7 +18,18 @@ public class TripCreateDTOValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         TripCreateDTO productCreateDTO = (TripCreateDTO) target;
-        if (productCreateDTO.getDateTo().compareTo(productCreateDTO.getDateFrom()) < 0) {
+
+        if(productCreateDTO.getDateFrom() == null) {
+            errors.rejectValue("dateFrom", "TripCreateDTOValidator.dateFrom.null");
+        }
+
+        if(productCreateDTO.getDateTo() == null) {
+            errors.rejectValue("dateTo", "TripCreateDTOValidator.dateTo.null");
+        }
+
+        if (productCreateDTO.getDateFrom() != null &&
+                productCreateDTO.getDateTo() != null &&
+                productCreateDTO.getDateTo().compareTo(productCreateDTO.getDateFrom()) < 0) {
             errors.rejectValue("dateTo", "TripCreateDTOValidator.dateTo.before.dateFrom");
         }
 
@@ -26,7 +37,12 @@ public class TripCreateDTOValidator implements Validator {
             errors.rejectValue("availableSpots", "TripCreateDTOValidator.availableSpots.negative");
         }
 
-        if (productCreateDTO.getPrice().compareTo(BigDecimal.ZERO) < 0) {
+        if(productCreateDTO.getPrice() == null) {
+            errors.rejectValue("price", "TripCreateDTOValidator.price.null");
+        }
+
+        if (productCreateDTO.getPrice() != null &&
+                productCreateDTO.getPrice().compareTo(BigDecimal.ZERO) < 0) {
             errors.rejectValue("price", "TripCreateDTOValidator.price.negative");
         }
     }

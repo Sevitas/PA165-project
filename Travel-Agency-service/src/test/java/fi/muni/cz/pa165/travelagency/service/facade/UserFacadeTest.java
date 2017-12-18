@@ -138,8 +138,8 @@ public class UserFacadeTest extends AbstractTestNGSpringContextTests {
         trip.setDateTo(cal.getTime());
         trip.setDestination("tripDestination");
         trip.setPrice(new BigDecimal("150"));
-        reservation.setReservedTrip(trip);
-        reservationNew.setReservedTrip(trip);
+        reservation.setTrip(trip);
+        reservationNew.setTrip(trip);
 
         TripDTO tripDTO = new TripDTO();
         tripDTO.setName("tripName");
@@ -162,8 +162,8 @@ public class UserFacadeTest extends AbstractTestNGSpringContextTests {
             trip.addExcursion(excursion);
             reservation.addReservedExcursion(excursion);
         }
-        reservation.setReservedTrip(trip);
-        reservationNew.setReservedTrip(trip);
+        reservation.setTrip(trip);
+        reservationNew.setTrip(trip);
         reservationDTO.setTrip(tripDTO);
         reservationNewDTO.setTrip(tripDTO);
         user.addReservation(reservation);

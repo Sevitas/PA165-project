@@ -11,6 +11,12 @@
     <name>Travel Agency api</name>
     
     <dependencies>
+        
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>Travel-Agency-persistence</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
         <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>

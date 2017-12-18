@@ -115,6 +115,8 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade{
         Reservation helgaParis = reservation(paris, excursionSet, helga, date("15/12/2017"),
             PaymentStateType.Paid);
         helga.addReservation(helgaParis);
+        helgaParis.addReservedExcursion(castle);
+        helgaParis.addReservedExcursion(hill);
         Reservation janezLjubljana = reservation(ljubljana, excursionSet, janez, date("11/12/2017"),
             PaymentStateType.NotPaid);
         janez.addReservation(janezLjubljana);
@@ -135,6 +137,8 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade{
         pepa.addReservation(pepaBrno);
         Reservation michalBrno = reservation(brno, excursionSet, michal, date("30/09/2017"),
             PaymentStateType.NotPaid);
+        michalBrno.addReservedExcursion(museum);
+        michalBrno.addReservedExcursion(spa);
         michal.addReservation(michalBrno);
 
     }
@@ -176,7 +180,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade{
         reservation.setCreated(created);
         reservation.setPaymentState(paymentState);
         reservation.setUser(user);
-        reservation.setReservedTrip(reservedTrip);
+        reservation.setTrip(reservedTrip);
         reservation.addAllReservedExcursions(excursions);
         
         reservationService.createReservation(reservation);
@@ -204,7 +208,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade{
     private Date date(String date) throws ParseException{
         Date parsedDate = new Date();
         
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         parsedDate = sdf.parse(date);
         
         return parsedDate;

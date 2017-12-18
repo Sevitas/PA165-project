@@ -1,6 +1,7 @@
 package fi.muni.cz.pa165.travelagency.controllers;
 
 
+
 import fi.muni.cz.pa165.travelagency.dto.UserAuthenticateDTO;
 import fi.muni.cz.pa165.travelagency.dto.UserDTO;
 import fi.muni.cz.pa165.travelagency.facade.UserFacade;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
 
 /**
  * Authentication controller
@@ -45,6 +47,7 @@ public class AuthenticationController {
         return "auth/login";
     }
 
+
     /**
      * Provides login for user
      * @param email email
@@ -53,6 +56,7 @@ public class AuthenticationController {
      * @param req request
      * @return main page
      */
+
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String authenticate(
             @RequestParam String email,
@@ -76,6 +80,7 @@ public class AuthenticationController {
         session.setAttribute("authenticatedUser", userDTO);
         redirectAttributes.addFlashAttribute("alert_info", "You have been logged in.");
 
+
         return userDTO.getIsAdmin() ? "redirect:/user/list" : "redirect:/user/view/" + userDTO.getId();
     }
 
@@ -94,4 +99,5 @@ public class AuthenticationController {
         redirectAttributes.addFlashAttribute("alert_info", "You have been successfully logged out.");
         return "redirect:auth/login";
     }
+
 }

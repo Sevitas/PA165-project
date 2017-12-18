@@ -37,7 +37,7 @@
                 <a class="navbar-brand" href="${pageContext.request.contextPath}/admin/trip/list">Trips</a>
                 <a class="navbar-brand" href="${pageContext.request.contextPath}/admin/excursion/list">Excursions</a>
                 <a class="navbar-brand" href="${pageContext.request.contextPath}/admin/user/list">Users</a>
-                <a class="navbar-brand" href="${pageContext.request.contextPath}/admin/reservation/list">Reservations</a>
+                <a class="navbar-brand" href="${pageContext.request.contextPath}/reservation/list/all">Reservations</a>
             </c:if>
         </div>
         <div id="navbar" class="collapse navbar-collapse">

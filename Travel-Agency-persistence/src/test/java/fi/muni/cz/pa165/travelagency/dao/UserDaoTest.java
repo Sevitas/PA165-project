@@ -177,7 +177,7 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests{
         reservation.setPaymentState(PaymentStateType.Paid);
         reservation.setCreated(cal.getTime());
         reservation.setUser(userOne);
-        reservation.setReservedTrip(trip);
+        reservation.setTrip(trip);
         reservationDao.create(reservation);
         
         

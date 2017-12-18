@@ -103,7 +103,7 @@ public class UserServiceTest extends AbstractTestNGSpringContextTests {
             trip.addExcursion(excursion);
             reservation.addReservedExcursion(excursion);
         }
-        reservation.setReservedTrip(trip);
+        reservation.setTrip(trip);
 
 
         user.addReservation(reservation);

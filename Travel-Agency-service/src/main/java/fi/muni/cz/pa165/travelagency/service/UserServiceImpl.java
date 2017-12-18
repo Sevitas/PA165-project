@@ -94,10 +94,10 @@ public class UserServiceImpl implements UserService {
                 if (reservation.getPaymentState() != PaymentStateType.Paid) {
                     continue;
                 }
-                totalSum = totalSum.add(reservation.getReservedTrip().getPrice());
+                totalSum = totalSum.add(reservation.getTrip().getPrice());
 
-                if (reservation.getReservedExcursions() != null) {
-                    for (Excursion excursion: reservation.getReservedExcursions()) {
+                if (reservation.getExcursions() != null) {
+                    for (Excursion excursion: reservation.getExcursions()) {
                         totalSum = totalSum.add(excursion.getPrice());
                     }
                 }

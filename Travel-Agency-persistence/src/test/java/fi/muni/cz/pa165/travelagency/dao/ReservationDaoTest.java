@@ -62,7 +62,7 @@ public class ReservationDaoTest extends AbstractTestNGSpringContextTests {
         reservation.setPaymentState(PaymentStateType.NotPaid);
         reservation.setCreated(cal.getTime());
         reservation.setUser(user);
-        reservation.setReservedTrip(trip);
+        reservation.setTrip(trip);
     }
 
     private void assertReservationsEqual(Reservation compared){
@@ -70,8 +70,8 @@ public class ReservationDaoTest extends AbstractTestNGSpringContextTests {
         Assert.assertEquals(compared.getUser(), this.reservation.getUser());
         Assert.assertEquals(compared.getId(), this.reservation.getId());
         Assert.assertEquals(compared.getPaymentState(), this.reservation.getPaymentState());
-        Assert.assertEquals(compared.getReservedExcursions(), this.reservation.getReservedExcursions());
-        Assert.assertEquals(compared.getReservedTrip(), this.reservation.getReservedTrip());
+        Assert.assertEquals(compared.getExcursions(), this.reservation.getExcursions());
+        Assert.assertEquals(compared.getTrip(), this.reservation.getTrip());
     }
 
     @Test
@@ -159,7 +159,7 @@ public class ReservationDaoTest extends AbstractTestNGSpringContextTests {
     public void testFindByTrip() {
         reservationDao.create(reservation);
         
-        List<Reservation> resList = reservationDao.findByTrip(reservation.getReservedTrip());
+        List<Reservation> resList = reservationDao.findByTrip(reservation.getTrip());
         Assert.assertTrue(resList.size() == 1);
         Assert.assertEquals(resList.get(0), reservation);
     }
@@ -199,7 +199,7 @@ public class ReservationDaoTest extends AbstractTestNGSpringContextTests {
         cal.set(2017, 10, 2);
         reservation2.setCreated(cal.getTime());
         reservation2.setUser(user2);
-        reservation2.setReservedTrip(trip2);
+        reservation2.setTrip(trip2);
         reservationDao.create(reservation2);
 
         Reservation reservation3 = new Reservation();
@@ -207,7 +207,7 @@ public class ReservationDaoTest extends AbstractTestNGSpringContextTests {
         cal.set(2017, 10, 6);
         reservation3.setCreated(cal.getTime());
         reservation3.setUser(user3);
-        reservation3.setReservedTrip(trip3);
+        reservation3.setTrip(trip3);
         reservationDao.create(reservation3);
 
         Calendar calStart = Calendar.getInstance();

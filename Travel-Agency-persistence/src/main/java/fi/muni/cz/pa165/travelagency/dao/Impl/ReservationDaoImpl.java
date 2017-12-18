@@ -57,7 +57,7 @@ public class ReservationDaoImpl implements ReservationDao {
     @Override
     public List<Reservation> findByTrip(Trip trip) {
         TypedQuery<Reservation> query = em.createQuery("SELECT o FROM Reservation "
-                + "o WHERE o.reservedTrip.id = :tripId", Reservation.class);
+                + "o WHERE o.trip.id = :tripId", Reservation.class);
         query.setParameter("tripId", trip.getId());
         return query.getResultList();
     }

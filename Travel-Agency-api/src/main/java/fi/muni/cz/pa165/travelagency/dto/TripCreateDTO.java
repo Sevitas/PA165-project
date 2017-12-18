@@ -24,9 +24,6 @@ public class TripCreateDTO {
     private int availableSpots;
 
     @NotNull
-    private Long excursionId;
-
-    @NotNull
     private String name;
 
     @NotNull
@@ -44,17 +41,15 @@ public class TripCreateDTO {
      * @param dateTo end date
      * @param destination destination
      * @param availableSpots available spots
-     * @param excursionId id of initial excursion
      * @param name name
      * @param price price
      */
     public TripCreateDTO(Date dateFrom, Date dateTo, String destination,
-                         int availableSpots, Long excursionId, String name, BigDecimal price) {
+                         int availableSpots, String name, BigDecimal price) {
         this.dateFrom = dateFrom;
         this.dateTo = dateTo;
         this.destination = destination;
         this.availableSpots = availableSpots;
-        this.excursionId = excursionId;
         this.name = name;
         this.price = price;
     }
@@ -140,22 +135,6 @@ public class TripCreateDTO {
     }
 
     /**
-     * Returns id of excursion of the trip
-     * @return id of excursion of the trip
-     */
-    public Long getExcursionId() {
-        return excursionId;
-    }
-
-    /**
-     * Sets id of excursion of the trip
-     * @param excursionId id of new excursion of the trip
-     */
-    public void setExcursionId(Long excursionId) {
-        this.excursionId = excursionId;
-    }
-
-    /**
      * Returns the price of the trip.
      * @return the price of the trip
      */
@@ -194,7 +173,6 @@ public class TripCreateDTO {
                 ", dateTo=" + dateTo +
                 ", destination='" + destination + '\'' +
                 ", availableSpots=" + availableSpots +
-                ", excursionId=" + excursionId +
                 ", name='" + name + '\'' +
                 ", price=" + price +
                 '}';

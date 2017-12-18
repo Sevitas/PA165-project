@@ -38,9 +38,6 @@ public class TripFacadeImpl implements TripFacade {
     public Long createTrip(TripCreateDTO trip) {
         Trip mapped = beanMappingService.mapTo(trip, Trip.class);
 
-        if(trip.getExcursionId() != null) {
-            mapped.addExcursion(excursionService.findById(trip.getExcursionId()));
-        }
         mapped = tripService.createTrip(mapped);
         return mapped.getId();
     }

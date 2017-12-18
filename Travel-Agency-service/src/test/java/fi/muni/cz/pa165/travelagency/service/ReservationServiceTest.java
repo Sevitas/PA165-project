@@ -66,7 +66,7 @@ public class ReservationServiceTest extends AbstractTransactionalTestNGSpringCon
         trip.addExcursion(excursion);
         reservation.setCreated(Date.valueOf("2014-1-1"));
         reservation.setUser(user);
-        reservation.setReservedTrip(trip);
+        reservation.setTrip(trip);
         reservation.addReservedExcursion(excursion);
     }
     
@@ -106,7 +106,7 @@ public class ReservationServiceTest extends AbstractTransactionalTestNGSpringCon
         when(reservationDao.findById(reservation.getId())).thenReturn(reservation);
         reservationService.addExcrusionsToReservation(reservation, 
                 Arrays.asList(excursion));
-        assertEquals(reservation.getReservedExcursions().size(), 1);
+        assertEquals(reservation.getExcursions().size(), 1);
         
     }
     
@@ -122,7 +122,7 @@ public class ReservationServiceTest extends AbstractTransactionalTestNGSpringCon
     @Test
     public void createReservationTest() {
         when(
-            tripService.findTripWithId(reservation.getReservedTrip().getId())
+            tripService.findTripWithId(reservation.getTrip().getId())
         ).thenReturn(trip);
         reservationService.createReservation(reservation);
         assertTrue(trip.getAvailableSpots() == 9);
@@ -133,7 +133,7 @@ public class ReservationServiceTest extends AbstractTransactionalTestNGSpringCon
     public void createReservationForFullTripTest() {
         trip.setAvailableSpots(0);
         when(
-            tripService.findTripWithId(reservation.getReservedTrip().getId())
+            tripService.findTripWithId(reservation.getTrip().getId())
         ).thenReturn(trip);
         reservationService.createReservation(reservation);
         verify(reservationDao).create(reservation);
@@ -247,8 +247,8 @@ public class ReservationServiceTest extends AbstractTransactionalTestNGSpringCon
         assertEquals(reservation1.getId(), reservation2.getId());
         assertEquals(reservation1.getCreated(), reservation2.getCreated());
         assertEquals(reservation1.getUser(), reservation2.getUser());
-        assertEquals(reservation1.getReservedExcursions(), reservation2.getReservedExcursions());
-        assertEquals(reservation1.getReservedTrip(), reservation2.getReservedTrip());
+        assertEquals(reservation1.getExcursions(), reservation2.getExcursions());
+        assertEquals(reservation1.getTrip(), reservation2.getTrip());
         assertEquals(reservation1.getPaymentState(), reservation2.getPaymentState());
     }
     

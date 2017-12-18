@@ -1,7 +1,7 @@
 package fi.muni.cz.pa165.travelagency.dto;
 
+import fi.muni.cz.pa165.travelagency.enums.PaymentStateType;
 import java.math.BigDecimal;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
@@ -30,6 +30,17 @@ public class ReservationDTO {
     private UserDTO user;
     
     private BigDecimal totalPrice;
+    
+    @NotNull
+    private PaymentStateType paymentState;
+
+    public PaymentStateType getPaymentState() {
+        return paymentState;
+    }
+
+    public void setPaymentState(PaymentStateType paymentState) {
+        this.paymentState = paymentState;
+    }
 
     public UserDTO getUser() {
         return user;
@@ -64,7 +75,7 @@ public class ReservationDTO {
     }
 
     public Set<ExcursionDTO> getExcursions() {
-        return Collections.unmodifiableSet(excursions);
+        return excursions;
     }
 
     public void setExcursions(Set<ExcursionDTO> excursions) {

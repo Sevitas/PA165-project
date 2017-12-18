@@ -14,6 +14,7 @@
 <jsp:attribute name="title"><fmt:message key="login.title"/></jsp:attribute>
 <jsp:attribute name="body">
 
+
     <form method="POST" action="${pageContext.request.contextPath}/auth/login">
         <h4><fmt:message key="login.sentence" /></h4>
 
@@ -25,6 +26,7 @@
 
         <button class="btn btn-lg btn-primary" type="submit" ><fmt:message key="login.button"/></button>
     </form>
+
 
 </jsp:attribute>
 </my:pagetemplate>

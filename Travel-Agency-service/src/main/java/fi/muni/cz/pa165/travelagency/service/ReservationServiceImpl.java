@@ -31,11 +31,11 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public Reservation createReservation(Reservation reservation) {
         try {
-            if (reservation.getReservedTrip().getAvailableSpots() == 0) {
+            if (reservation.getTrip().getAvailableSpots() == 0) {
                 throw new TravelAgencyServiceException("Cannot create new "
                         + "reservation. There is no more free slot for this trip.");
             }
-            Trip trip = tripService.findTripWithId(reservation.getReservedTrip().getId());
+            Trip trip = tripService.findTripWithId(reservation.getTrip().getId());
             trip.setAvailableSpots(trip.getAvailableSpots() - 1);
             tripService.updateTrip(trip);
             reservationDao.create(reservation);
@@ -63,7 +63,10 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public void removeReservation(Reservation reservation) {
         try {
+            Trip trip = tripService.findTripWithId(reservation.getTrip().getId());
             reservationDao.remove(reservation);
+            trip.setAvailableSpots(trip.getAvailableSpots() + 1);
+            tripService.updateTrip(trip);
         }  catch (IllegalArgumentException e) {
             throw new TravelAgencyServiceException("Not entity or removed.", e);
         } catch (TransactionRequiredException e) {
@@ -74,7 +77,7 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public void addExcursionToReservation(Reservation reservation, Excursion excursion) {
         try {
-            if (!reservation.getReservedTrip().getExcursions().contains(excursion)) { 
+            if (!reservation.getTrip().getExcursions().contains(excursion)) { 
                 throw new TravelAgencyServiceException("Cannot add excrusion to "
                         + "reservation. There is no such excrusion available for this trip.");
             }
@@ -91,7 +94,7 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public void addExcrusionsToReservation(Reservation reservation, List<Excursion> excursions) {
         try {
-            if (!reservation.getReservedTrip().getExcursions().containsAll(excursions)) { 
+            if (!reservation.getTrip().getExcursions().containsAll(excursions)) { 
                 throw new TravelAgencyServiceException("Cannot add excrusions to "
                         + "reservation. One of excursions is not available for this trip.");
             }
@@ -152,8 +155,8 @@ public class ReservationServiceImpl implements ReservationService {
     public BigDecimal getTotalPrice(Reservation reservation) {
         try {
             Reservation r = reservationDao.findById(reservation.getId());
-            BigDecimal price = r.getReservedTrip().getPrice();
-            for (Excursion e: r.getReservedExcursions()) {
+            BigDecimal price = r.getTrip().getPrice();
+            for (Excursion e: r.getExcursions()) {
                 price = price.add(e.getPrice());
             }
             return price;
@@ -161,6 +164,7 @@ public class ReservationServiceImpl implements ReservationService {
             throw new TravelAgencyServiceException("not valid key or null.", e);
         }
     }
+
 
     @Override
     public List<Reservation> getReservationsCreatedBetween(Date start, Date end) {

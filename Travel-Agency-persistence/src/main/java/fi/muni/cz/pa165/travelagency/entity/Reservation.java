@@ -4,6 +4,7 @@ import fi.muni.cz.pa165.travelagency.enums.PaymentStateType;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -50,13 +51,13 @@ public class Reservation implements Serializable {
     
     @NotNull
     @ManyToOne(optional=false)
-    private Trip reservedTrip;
+    private Trip trip;
         
     @ManyToMany
     @JoinTable(name="RESERVED_EXC",
             joinColumns = @JoinColumn(name = "Reservation_id"),
             inverseJoinColumns = @JoinColumn(name = "Excursion_id"))
-    private Set<Excursion> reservedExcursions = new HashSet<>();
+    private Set<Excursion> excursions = new HashSet<>();
     
     @NotNull
     @ManyToOne(optional=false)
@@ -78,8 +79,8 @@ public class Reservation implements Serializable {
         return user;
     }
 
-    public Set<Excursion> getReservedExcursions() {
-        return Collections.unmodifiableSet(reservedExcursions);
+    public Set<Excursion> getExcursions() {
+        return Collections.unmodifiableSet(excursions);
     }
     
     /**
@@ -88,7 +89,7 @@ public class Reservation implements Serializable {
      * @param excursion excursion to be added.
      */
     public void addReservedExcursion(Excursion excursion) {
-        reservedExcursions.add(excursion);
+        excursions.add(excursion);
     }
     
     /**
@@ -97,7 +98,7 @@ public class Reservation implements Serializable {
      * @param excursion excursion to be removed
      */
     public void removeReservedExcursion(Excursion excursion) {
-        reservedExcursions.remove(excursion);
+        excursions.remove(excursion);
     }
 
     /**
@@ -106,7 +107,7 @@ public class Reservation implements Serializable {
      * @param excursions collection of excursion to be added
      */
     public void addAllReservedExcursions(Collection<Excursion> excursions) {
-        this.reservedExcursions.addAll(excursions);
+        this.excursions.addAll(excursions);
     }
     
     public void setUser(User user) {
@@ -129,12 +130,12 @@ public class Reservation implements Serializable {
         this.created = created;
     }
     
-    public Trip getReservedTrip() {
-        return reservedTrip;
+    public Trip getTrip() {
+        return trip;
     }
 
-    public void setReservedTrip(Trip reservedTrip) {
-        this.reservedTrip = reservedTrip;
+    public void setTrip(Trip trip) {
+        this.trip = trip;
     }
 
     @Override
@@ -142,7 +143,7 @@ public class Reservation implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((created == null) ? 0 : created.hashCode());
-        result = prime * result + ((reservedTrip == null) ? 0 : reservedTrip.hashCode());
+        result = prime * result + ((trip == null) ? 0 : trip.hashCode());
         result = prime * result + ((user == null) ? 0 : user.hashCode());
         return result;
     }
@@ -166,11 +167,11 @@ public class Reservation implements Serializable {
         } else if (!created.equals(other.getCreated())) {
             return false;
         }
-        if (reservedTrip == null) {
-            if (other.getReservedTrip() != null) {
+        if (trip == null) {
+            if (other.getTrip() != null) {
                 return false;
             }
-        } else if (!reservedTrip.equals(other.getReservedTrip())) {
+        } else if (!trip.equals(other.getTrip())) {
             return false;
         }
         if (user == null) {
@@ -186,6 +187,6 @@ public class Reservation implements Serializable {
     @Override
     public String toString() {
         return "Reservation{" + "id=" + id + ", created=" + created + 
-                ", reservedTrip=" + reservedTrip + ", user=" + user + '}';
+                ", reservedTrip=" + trip + ", user=" + user + '}';
     }
 }

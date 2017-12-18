@@ -114,7 +114,7 @@ public class ReservationFacadeTest extends AbstractTestNGSpringContextTests {
         reservation.setCreated(Date.valueOf("2014-1-1"));
         reservation.setUser(user);
         reservation.addReservedExcursion(excursion);
-        reservation.setReservedTrip(trip);
+        reservation.setTrip(trip);
         
         userDTO = new UserDTO();
         userDTO.setId(1l);
@@ -180,7 +180,7 @@ public class ReservationFacadeTest extends AbstractTestNGSpringContextTests {
     @Test
     public void removeReservation() {
         reservationFacade.removeReservation(1l);
-        verify(reservationService).removeReservation(new Reservation(1l));
+        verify(reservationService).removeReservation(reservation);
     }
     
     @Test

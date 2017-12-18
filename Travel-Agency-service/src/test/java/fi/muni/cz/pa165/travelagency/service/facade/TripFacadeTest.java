@@ -113,7 +113,7 @@ public class TripFacadeTest extends AbstractTestNGSpringContextTests {
         t2 = new Trip(start, end, dest, available,
                 eSet, name, price);
 
-        c1 = new TripCreateDTO(start, end, dest, available, eId, name, price);
+        c1 = new TripCreateDTO(start, end, dest, available, name, price);
         d1 = new TripDTO(start, end, dest, available, eDTOSet, name, price);
         d1.setId(tId);
 
