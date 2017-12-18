@@ -1,5 +1,5 @@
 <%--
-User: Martin Sevcik <422365>
+  User: Martin Sevcik <422365>
   Date: 18.12.2017
   Time: 12:40
 --%>
@@ -10,19 +10,20 @@ User: Martin Sevcik <422365>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<my:pagetemplate title="Login">
+<my:pagetemplate>
+<jsp:attribute name="title"><fmt:message key="login.title"/></jsp:attribute>
 <jsp:attribute name="body">
 
     <form method="POST" action="${pageContext.request.contextPath}/auth/login">
-        <h4>Please login.</h4>
+        <h4><fmt:message key="login.sentence" /></h4>
 
-        <label for="email">Email:</label>
-        <input type="text" name="email" placeholder="example: user@gmail.com" required/>
+        <label for="email"><fmt:message key="email"/></label>
+        <input id="email" type="text" name="email" placeholder="example: user@gmail.com" required class="form-control"/>
 
-        <label for="password">Password:</label>
-        <input type="text" name="password" placeholder="Password" required/>
+        <label for="password"><fmt:message key="login.password"/></label>
+        <input id="password" type="password" name="password" placeholder="Password" required class="form-control"/>
 
-        <button class="btn btn-lg btn-primary" type="submit" >Sign in</button>
+        <button class="btn btn-lg btn-primary" type="submit" ><fmt:message key="login.button"/></button>
     </form>
 
 </jsp:attribute>

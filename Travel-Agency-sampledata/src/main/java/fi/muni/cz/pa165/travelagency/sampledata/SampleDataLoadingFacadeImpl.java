@@ -5,7 +5,6 @@ import fi.muni.cz.pa165.travelagency.entity.Reservation;
 import fi.muni.cz.pa165.travelagency.entity.Trip;
 import fi.muni.cz.pa165.travelagency.entity.User;
 import fi.muni.cz.pa165.travelagency.enums.PaymentStateType;
-import fi.muni.cz.pa165.travelagency.enums.UserRoleType;
 import fi.muni.cz.pa165.travelagency.service.ExcursionService;
 import fi.muni.cz.pa165.travelagency.service.ReservationService;
 import fi.muni.cz.pa165.travelagency.service.TripService;
@@ -93,19 +92,19 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade{
         brno.addExcursion(caves);
         
         User helga = user("Helga", "Steinke", "000", "helga@user.com", "000000",
-            reservationSet, date("26/01/1994"), "000000000", UserRoleType.CUSTOMER);
+            reservationSet, date("26/01/1994"), "000000000", false);
         User mark = user("Mark", "Smith", "001", "mark@user.com", "001001",
-            reservationSet, date("11/05/1985"), "001001001", UserRoleType.CUSTOMER);
+            reservationSet, date("11/05/1985"), "001001001", false);
         User janez = user("Janez", "Novak", "010", "janez@user.com", "010010",
-            reservationSet, date("26/02/1992"), "010010010", UserRoleType.CUSTOMER);
+            reservationSet, date("26/02/1992"), "010010010", false);
         User michal = user("Michal", "Rozycki", "011", "michal@user.com", "011011",
-            reservationSet, date("06/09/1976"), "011011011", UserRoleType.CUSTOMER);
+            reservationSet, date("06/09/1976"), "011011011", false);
         User adminJakov = user("Jakov", "Boss", "100", "jakov@user.com", "100100",
-            reservationSet, date("03/07/1974"), "100100100", UserRoleType.ADMINISTRATOR);
+            reservationSet, date("03/07/1974"), "100100100", true);
         User adminEva = user("Eva", "Boss", "101", "eva@user.com", "101101",
-            reservationSet, date("17/11/1984"), "100100100", UserRoleType.ADMINISTRATOR);
+            reservationSet, date("17/11/1984"), "100100100", true);
         User pepa = user("Pepa", "Petak", "111", "pepa@user.com", "111111",
-            reservationSet, date("03/09/1995"), "111111111", UserRoleType.CUSTOMER);
+            reservationSet, date("03/09/1995"), "111111111", false);
         
         Reservation markParis = reservation(paris, excursionSet, mark, date("10/12/2017"),
             PaymentStateType.Paid);
@@ -186,7 +185,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade{
     
     private User user(String name, String surname, String idCardNumber, String email,
             String phoneNumber, Set<Reservation> reservations, Date birthDate, String password,
-            UserRoleType userType){
+            Boolean isAdmin){
         
         User user = new User();
         user.setBirthDate(birthDate);
@@ -196,7 +195,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade{
         user.setPhoneNumber(phoneNumber);
         user.setReservation(reservations);
         user.setSurname(surname);
-        user.setUserRoleType(userType);
+        user.setIsAdmin(isAdmin);
         
         userService.registerUser(user, password);
         return user;

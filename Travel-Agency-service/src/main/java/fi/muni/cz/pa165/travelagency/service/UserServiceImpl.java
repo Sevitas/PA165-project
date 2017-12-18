@@ -180,7 +180,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean isAdmin(User user) {
         try {
-            return userDao.findById(user.getId()).isAdmin();
+            return userDao.findById(user.getId()).getIsAdmin();
         } catch (NullPointerException npe){
             throw npe;
         } catch (Exception e){

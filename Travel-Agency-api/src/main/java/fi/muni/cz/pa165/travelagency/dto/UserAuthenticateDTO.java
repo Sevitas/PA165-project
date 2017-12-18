@@ -7,21 +7,21 @@ package fi.muni.cz.pa165.travelagency.dto;
 public class UserAuthenticateDTO {
 
     /**
-     * Representing id
+     * Representing email
      */
-    private Long id;
+    private String email;
 
     /**
      * Representing hash of password
      */
     private String passwordHash;
 
-    public Long getId() {
-        return id;
+    public String getEmail() {
+        return email;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPasswordHash() {

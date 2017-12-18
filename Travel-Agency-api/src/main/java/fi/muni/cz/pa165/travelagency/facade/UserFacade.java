@@ -91,9 +91,9 @@ public interface UserFacade {
      * Tries to authenticate user
      * @param user user to authenticate
      * @throws IllegalArgumentException if user is null or mapped userDTO is null
-     * @return true if authenticated, false otherwise
+     * @return User if authenticated, null otherwise
      */
-    Boolean authenticate(UserAuthenticateDTO user);
+    UserDTO authenticate(UserAuthenticateDTO user);
 
     /**
      * Checks whether user is an admin

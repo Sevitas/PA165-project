@@ -151,12 +151,21 @@ public class UserFacadeImpl implements UserFacade {
     }
 
     @Override
-    public Boolean authenticate(UserAuthenticateDTO user) {
-        if (user == null){
+    public UserDTO authenticate(UserAuthenticateDTO userAuth) {
+        if (userAuth == null){
             throw new IllegalArgumentException("user is null");
         }
 
-        return userService.authenticate(userService.findById(user.getId()), user.getPasswordHash());
+        User user = userService.findByEmail(userAuth.getEmail());
+        if (user == null) {
+            return null;
+        }
+
+        if (!userService.authenticate(user, userAuth.getPasswordHash())) {
+            return null;
+        }
+
+        return beanMappingService.mapTo(user, UserDTO.class);
     }
 
     @Override

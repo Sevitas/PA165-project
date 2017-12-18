@@ -1,8 +1,6 @@
 package fi.muni.cz.pa165.travelagency.dto;
 
 
-import fi.muni.cz.pa165.travelagency.enums.UserRoleType;
-
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -54,9 +52,9 @@ public class UserDTO {
     private Set<ReservationDTO> reservations;
 
     /**
-     * Representing role of user
+     * Representing if user is admin
      */
-    private UserRoleType userRoleType;
+    private Boolean isAdmin;
 
     /**
      * Non parametric constructor
@@ -73,12 +71,12 @@ public class UserDTO {
         this.id = id;
     }
 
-    public UserRoleType getUserRoleType() {
-        return userRoleType;
+    public Boolean getIsAdmin() {
+        return isAdmin;
     }
 
-    public void setUserRoleType(UserRoleType userRoleType) {
-        this.userRoleType = userRoleType;
+    public void setIsAdmin(Boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
 
     public String getName() {

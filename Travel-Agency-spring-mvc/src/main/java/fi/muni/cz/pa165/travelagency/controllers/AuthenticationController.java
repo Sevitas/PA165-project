@@ -6,7 +6,6 @@ import fi.muni.cz.pa165.travelagency.dto.UserDTO;
 import fi.muni.cz.pa165.travelagency.facade.UserFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * ss
+ * Authentication controller
+ * @author Martin Sevcik <422365>
  */
 @Controller
 @RequestMapping("/auth")
@@ -32,16 +31,11 @@ public class AuthenticationController {
 
     /**
      * Provides loading of logging page
-     * @param model model
      * @param req request
-     * @param res response
      * @return login page or main page if user is already logged in
      */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String authForm(
-            Model model,
-            HttpServletRequest req,
-            HttpServletResponse res) {
+    public String authForm(HttpServletRequest req) {
         LOGGER.info("GET request: /auth/login");
         HttpSession session = req.getSession(true);
         if (session.getAttribute("authenticatedUser") != null) {
@@ -55,20 +49,16 @@ public class AuthenticationController {
      * Provides login for user
      * @param email email
      * @param password password
-     * @param model model
      * @param redirectAttributes redirect attributes
      * @param req request
-     * @param res response
      * @return main page
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String authenticate(
             @RequestParam String email,
             @RequestParam String password,
-            Model model,
             RedirectAttributes redirectAttributes,
-            HttpServletRequest req,
-            HttpServletResponse res) {
+            HttpServletRequest req) {
         LOGGER.info("POST request: /auth/login");
         UserAuthenticateDTO userAuthenticateDTO = new UserAuthenticateDTO();
         userAuthenticateDTO.setPasswordHash(password);
@@ -86,19 +76,17 @@ public class AuthenticationController {
         session.setAttribute("authenticatedUser", userDTO);
         redirectAttributes.addFlashAttribute("alert_info", "You have been logged in.");
 
-        return "redirect:";
+        return userDTO.getIsAdmin() ? "redirect:/user/list" : "redirect:/user/view/" + userDTO.getId();
     }
 
     /**
      * Provides logout for user
-     * @param model model
      * @param req request
      * @param redirectAttributes redirect attributes
      * @return login page
      */
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String logout(Model model,
-                         HttpServletRequest req,
+    public String logout(HttpServletRequest req,
                          RedirectAttributes redirectAttributes) {
         LOGGER.info("GET request: /auth/logout");
         HttpSession session = req.getSession(true);

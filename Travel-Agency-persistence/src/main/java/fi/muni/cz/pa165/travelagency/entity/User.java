@@ -1,8 +1,6 @@
 package fi.muni.cz.pa165.travelagency.entity;
 
 
-import fi.muni.cz.pa165.travelagency.enums.UserRoleType;
-
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -13,7 +11,6 @@ import javax.persistence.Column;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.OneToMany;
-import javax.persistence.Enumerated;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
 import java.util.HashSet;
@@ -91,8 +88,10 @@ public class User implements Serializable {
     @NotNull
     private String passwordHash;
 
-    @Enumerated
-    private UserRoleType userRoleType;
+    /**
+     * Representing whether user is admin
+     */
+    private Boolean isAdmin;
 
     /**
      * Basic getter
@@ -247,12 +246,12 @@ public class User implements Serializable {
         this.passwordHash = passwordHash;
     }
 
-    public UserRoleType getUserRoleType() {
-        return userRoleType;
+    public Boolean getIsAdmin() {
+        return isAdmin;
     }
 
-    public void setUserRoleType(UserRoleType userRoleType) {
-        this.userRoleType = userRoleType;
+    public void setIsAdmin(Boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
 
     /**
@@ -278,9 +277,5 @@ public class User implements Serializable {
     @Override
     public int hashCode() {
         return 31 * idCardNumber.hashCode();
-    }
-
-    public boolean isAdmin() {
-        return this.getUserRoleType() == UserRoleType.ADMINISTRATOR;
     }
 }
