@@ -26,7 +26,7 @@
                                 <th><fmt:message key="name"/></th>
                                 <th><fmt:message key="surname"/></th>
                                 <th><fmt:message key="user.view.phoneNumber"/></th>
-                                <th><fmt:message key="user.view.idCard"/></th>
+                                <th><fmt:message key="idCard"/></th>
                                 <th><th><fmt:message key="emailSimple"/></th></th>
                                 <th><fmt:message key="user.view.birthDate"/></th>
                                 <th><fmt:message key="reservations"/></th>

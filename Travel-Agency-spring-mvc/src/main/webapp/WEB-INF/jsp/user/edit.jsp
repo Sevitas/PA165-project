@@ -32,6 +32,10 @@
                         <td><form:input id="phoneNumber" name="phoneNumber" path="phoneNumber" type="text" value="${user.phoneNumber}" pattern="^[0-9]{9}"/></td>
                     </tr>
                     <tr>
+                        <td><label for="idCardNumber" ><fmt:message key="idCard"/></label></td>
+                        <td><form:input id="idCardNumber" name="idCardNumber" path="idCardNumber" type="text" value="${user.idCardNumber}"/></td>
+                    </tr>
+                    <tr>
                         <td><label for="email" ><fmt:message key="email"/></label></td>
                         <td><form:input id="email" name="email" path="email" type="email" value="${user.email}"/></td>
                     </tr>

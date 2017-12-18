@@ -161,37 +161,31 @@ public class UserController {
 
         if (userUpdated == null) {
             redirectAttributes.addFlashAttribute("alert_danger", "Cannot update not existing user.");
-            return USER_EDIT_PAGE_URL + "id";
+            return USER_EDIT_PAGE_URL + id;
         }
 
         UserDTO userDTO = userFacade.findById(id);
         if (userDTO == null) {
             redirectAttributes.addFlashAttribute("alert_danger", "Cannot update not existing user.");
-            return USER_EDIT_PAGE_URL + "id";
+            return USER_EDIT_PAGE_URL + id;
         }
 
         if (isEmpty(userUpdated.getName())) {
             redirectAttributes.addFlashAttribute("alert_danger", "Cannot update user with empty surname.");
-            return USER_EDIT_PAGE_URL + "id";
+            return USER_EDIT_PAGE_URL + id;
         }
 
         if (isEmpty(userUpdated.getIdCardNumber())) {
             redirectAttributes.addFlashAttribute("alert_danger", "Cannot update user with empty idCardNumber.");
-            return USER_EDIT_PAGE_URL + "id";
+            return USER_EDIT_PAGE_URL + id;
         }
 
         if (isEmpty(userUpdated.getEmail())) {
             redirectAttributes.addFlashAttribute("alert_danger", "Cannot update user with empty email.");
-            return USER_EDIT_PAGE_URL + "id";
-        }
-
-        if (userUpdated.getBirthDate() == null) {
-            redirectAttributes.addFlashAttribute("alert_danger", "Cannot update user with empty birthDate.");
-            return USER_EDIT_PAGE_URL + "id";
+            return USER_EDIT_PAGE_URL + id;
         }
 
         try {
-            userDTO.setBirthDate(userUpdated.getBirthDate());
             userDTO.setName(userUpdated.getName());
             userDTO.setSurname(userUpdated.getSurname());
             userDTO.setEmail(userUpdated.getEmail());
@@ -201,9 +195,9 @@ public class UserController {
             userFacade.updateUser(userDTO);
         } catch (Exception e) {
             LOGGER.error("POST request: user/edit/{}", id, e);
-            redirectAttributes.addFlashAttribute("alert_danger", "Cannot update user with empty birthDate.");
+            redirectAttributes.addFlashAttribute("alert_danger", "Error occurred during updating");
+            return USER_EDIT_PAGE_URL + id;
         }
-
 
         LOGGER.info("POST request: user/edit/{}", id);
         return "redirect:/user/view/" + id;
