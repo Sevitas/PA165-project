@@ -23,7 +23,6 @@
                 <th><fmt:message key="surname"/></th>
                 <th><fmt:message key="name"/></th>
                 <th><fmt:message key="email"/></th>
-                <th><fmt:message key="user.list.admin"/></th>
                 <th><fmt:message key="reservations"/></th>
                 <th><fmt:message key="user.list.detail"/></th>
                 <th><fmt:message key="edit"/></th>
@@ -37,18 +36,6 @@
                         <td><c:out value="${user.surname}" /></td>
                         <td><c:out value="${user.name}" /></td>
                         <td><c:out value="${user.email}" /></td>
-                        <td>
-                            <form method="POST" action="${pageContext.request.contextPath}/user/admin/${user.id}&${user.isAdmin}">
-                                <c:choose>
-                                    <c:when test="${user.isAdmin}">
-                                        <button type="submit" class="btn btn-primary"><fmt:message key="user.list.unmake"/></button>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <button type="submit" class="btn btn-primary"><fmt:message key="user.list.make"/></button>
-                                    </c:otherwise>
-                                </c:choose>
-                            </form>
-                        </td>
                         <td>
                             <a href="${pageContext.request.contextPath}/reservation/list/${user.id}" class="btn btn-primary">Reservations</a>
                         </td>>

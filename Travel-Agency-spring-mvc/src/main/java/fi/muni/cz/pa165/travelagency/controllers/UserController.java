@@ -187,14 +187,14 @@ public class UserController {
             return USER_EDIT_PAGE_URL + "id";
         }
 
-        userDTO.setBirthDate(userUpdated.getBirthDate());
-        userDTO.setName(userUpdated.getName());
-        userDTO.setSurname(userUpdated.getSurname());
-        userDTO.setEmail(userUpdated.getEmail());
-        userDTO.setIdCardNumber(userUpdated.getIdCardNumber());
-        userDTO.setPhoneNumber(userUpdated.getPhoneNumber());
-
         try {
+            userDTO.setBirthDate(userUpdated.getBirthDate());
+            userDTO.setName(userUpdated.getName());
+            userDTO.setSurname(userUpdated.getSurname());
+            userDTO.setEmail(userUpdated.getEmail());
+            userDTO.setIdCardNumber(userUpdated.getIdCardNumber());
+            userDTO.setPhoneNumber(userUpdated.getPhoneNumber());
+
             userFacade.updateUser(userDTO);
         } catch (Exception e) {
             LOGGER.error("POST request: user/edit/{}", id, e);
@@ -204,46 +204,6 @@ public class UserController {
 
         LOGGER.info("POST request: user/edit/{}", id);
         return "redirect:/user/view/" + id;
-    }
-
-    /**
-     * Makes or umakes user admin
-     * @param id id
-     * @param isAdmin isAdmin
-     * @param req request
-     * @param redirectAttributes redirect attributes
-     * @param model model
-     * @return list of users
-     */
-    @RequestMapping(value = "/admin/{id}&{isAdmin}", method = RequestMethod.POST)
-    public String administration(@PathVariable Long id,
-                                 @PathVariable Boolean isAdmin,
-                                 HttpServletRequest req,
-                                 RedirectAttributes redirectAttributes,
-                                 Model model) {
-
-        if (!isAuthenticated(req, true)) {
-            return AUTH_PAGE_URL;
-        }
-
-        UserDTO userDTO = userFacade.findById(id);
-        if (userDTO == null) {
-            LOGGER.error("POST request: user/admin/{}", id);
-            redirectAttributes.addFlashAttribute("alert_danger", "Cannot make admin existing user.");
-            return "redirect:/user/list";
-        }
-
-        try {
-            userDTO.setIsAdmin(isAdmin);
-            userFacade.updateUser(userDTO);
-        } catch (Exception e) {
-            LOGGER.error("POST request: user/admin/{}", id, e);
-            redirectAttributes.addFlashAttribute("alert_danger", "Cannot update user with empty birthDate.");
-        }
-
-        LOGGER.info("POST request: user/admin/", id);
-        model.addAttribute("user", userDTO);
-        return "redirect:/user/list";
     }
 
     /**
