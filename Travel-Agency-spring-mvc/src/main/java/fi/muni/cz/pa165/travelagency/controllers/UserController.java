@@ -49,11 +49,29 @@ public class UserController {
             return AUTH_PAGE_URL;
         }
 
-        UserDTO userDTO = userFacade.findById(id);
-        if (userDTO == null) {
-            LOGGER.warn("GET user/view");
+        UserDTO userDTO = null;
+        try {
+            userDTO = userFacade.findById(id);
+        } catch (Exception e) {
+            LOGGER.error("GET request: user/view/");
             redirectAttributes.addFlashAttribute("alert_danger", "Cannot display not existing user.");
+            return "redirect:/auth/logout";
         }
+
+        if (userDTO == null) {
+            LOGGER.error("GET request: user/view");
+            redirectAttributes.addFlashAttribute("alert_danger", "Cannot display not existing user.");
+            return "redirect:/auth/logout";
+        }
+
+        UserDTO authUser = (UserDTO) req.getSession().getAttribute("authenticatedUser");
+        if (!authUser.getIsAdmin() && !authUser.equals(userDTO)) {
+            LOGGER.error("GET request: user/view");
+            redirectAttributes.addFlashAttribute("alert_danger",
+                    "You do not have administrator permission for editing other user.");
+            return "redirect:/user/view/" + id;
+        }
+
 
         LOGGER.info("GET request: user/edit/", id);
         model.addAttribute("user", userDTO);
