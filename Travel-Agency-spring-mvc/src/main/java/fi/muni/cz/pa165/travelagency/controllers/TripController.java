@@ -66,7 +66,7 @@ public class TripController {
                     "Unauthorized.");
             return "redirect:/auth/login";
         }
-
+        model.addAttribute("authenticatedUser", authUser);
         model.addAttribute("trips", tripFacade.getAllTrips());
         return "trip/list";
     }
@@ -99,7 +99,7 @@ public class TripController {
                     "and cannot be deleted.");
             return "redirect:" + uriBuilder.path("/trip/list").toUriString();
         }
-
+        model.addAttribute("authenticatedUser", authUser);
         tripFacade.deleteTrip(id);
         LOGGER.debug("delete({})", id);
         redirectAttributes.addFlashAttribute("alert_success", "Trip \"" + trip.getName() + "\" was deleted.");
@@ -125,7 +125,7 @@ public class TripController {
                     "Unauthorized.");
             return "redirect:/auth/login";
         }
-
+        model.addAttribute("authenticatedUser", authUser);
         LOGGER.debug("view({})", id);
         model.addAttribute("trip", tripFacade.getTripWithId(id));
         return "trip/view";
@@ -149,7 +149,7 @@ public class TripController {
                     "Unauthorized.");
             return "redirect:/auth/login";
         }
-
+        model.addAttribute("authenticatedUser", authUser);
         LOGGER.debug("new()");
         model.addAttribute("tripCreate", new TripCreateDTO());
         return "trip/new";
@@ -221,7 +221,7 @@ public class TripController {
             excs.add(exc.getId());
         }
         tripFacade.addAllExcursions(id, excs);
-
+        model.addAttribute("authenticatedUser", authUser);
         //report success
         redirectAttributes.addFlashAttribute("alert_success", "Trip " + id + " was created");
         return "redirect:" + uriBuilder.path("/trip/view/{id}").buildAndExpand(id).encode().toUriString();
@@ -266,7 +266,7 @@ public class TripController {
         //update trip
         formBean.setId(id);
         tripFacade.updateTrip(formBean);
-
+        model.addAttribute("authenticatedUser", authUser);
         //report success
         redirectAttributes.addFlashAttribute("alert_success", "Trip " + id + " was edited");
         return "redirect:" + uriBuilder.path("/trip/view/{id}").buildAndExpand(id).encode().toUriString();
@@ -302,7 +302,7 @@ public class TripController {
             excs.add(exc.getId());
         }
         tripFacade.addAllExcursions(id, excs);
-
+        model.addAttribute("authenticatedUser", authUser);
         return "redirect:" + uriBuilder.path("/trip/view/{id}").buildAndExpand(id).encode().toUriString();
     }
 }

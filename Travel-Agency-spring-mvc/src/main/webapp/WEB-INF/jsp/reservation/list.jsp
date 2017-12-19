@@ -7,7 +7,7 @@
 
 <my:pagetemplate title="Reservations">
 <jsp:attribute name="body">
-    <c:if test="${authenticatedUser.isAdmin()}">
+    <c:if test="${authenticatedUser.isAdmin}">
     <div class="row">
         <div class="btn">
             <form method="get" action="${pageContext.request.contextPath}/reservation/list/all">
@@ -29,7 +29,7 @@
     <table class="table">
         <thead>
         <tr>
-            <c:if test="${authenticatedUser.isAdmin()}">
+            <c:if test="${authenticatedUser.isAdmin}">
                 <th><f:message key="reservation.list.id"/></th>
                 <th><f:message key="reservation.list.user"/></th>
             </c:if>
@@ -43,7 +43,7 @@
         <tbody>
         <c:forEach items="${reservations}" var="reservation">
             <tr>
-                <c:if test="${authenticatedUser.isAdmin()}">
+                <c:if test="${authenticatedUser.isAdmin}">
                     <td>${reservation.id}</td>
                     <td>${reservation.user.getName()}</td>
                 </c:if>    
@@ -63,7 +63,7 @@
                 <td>
                     <a href="${pageContext.request.contextPath}/reservation/detail/${reservation.id}" class="btn btn-primary"><f:message key="reservation.list.detail.button"/></a>
                 </td>
-                <c:if test="${authenticatedUser.isAdmin()}">
+                <c:if test="${authenticatedUser.isAdmin}">
                 <td>
                     <a href="${pageContext.request.contextPath}/reservation/paid/${reservation.id}" class="btn btn-success"><f:message key="reservation.list.set.paid"/></a>
                 </td>

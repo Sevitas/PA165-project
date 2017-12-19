@@ -26,7 +26,6 @@ import static org.mockito.Mockito.verify;
 import static org.testng.Assert.assertEquals;
 import org.testng.annotations.Test;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.entry;
 
 /**
  * Excursion service Tests for the Travel Angecy project.

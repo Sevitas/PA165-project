@@ -93,6 +93,7 @@ public class ReservationController {
                         "Unanthorized.");
             return "redirect:/auth/login";
         }
+        model.addAttribute("authenticatedUser", authUser);
         model.addAttribute("reservations", reservations);
         model.addAttribute("users", userFacade.findAll());
         return LISTALL;
@@ -142,7 +143,7 @@ public class ReservationController {
                         "Unanthorized.");
             return "redirect:/auth/login";
         }
-        
+        model.addAttribute("authenticatedUser", authUser);
         model.addAttribute("reservation", reservationDTO);
         return "reservation/detail";
     }
@@ -194,8 +195,7 @@ public class ReservationController {
             redirectAttributes.addFlashAttribute("alert_danger",
                         "Unanthorized.");
             return "redirect:/auth/login";
-        }
-            
+        }    
         redirectAttributes.addFlashAttribute(
                     "alert_success", "Reservation with id="+ id +
                             " was deleted.");
@@ -249,7 +249,7 @@ public class ReservationController {
                         "Unanthorized.");
             return "redirect:/auth/login";
         }    
-            
+   
         redirectAttributes.addFlashAttribute(
                     "alert_success", "Reservation with id="+ id +
                             " was paid.");
@@ -337,6 +337,7 @@ public class ReservationController {
                         "Unanthorized.");
             return "redirect:/auth/login";
         }
+        model.addAttribute("authenticatedUser", authUser);
         return "reservation/edit";
 
     }
@@ -381,6 +382,7 @@ public class ReservationController {
                         "Unanthorized.");
             return "redirect:/auth/login";
         }
+        model.addAttribute("authenticatedUser", authUser);
         redirectAttributes.addFlashAttribute(
                     "alert_success", "Reservation with id="+ id +
                             " was updated.");

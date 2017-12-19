@@ -54,7 +54,7 @@ public class BrowsingController {
                     "You must log in.");
             return "redirect:/auth/login";
         }
-
+        model.addAttribute("authenticatedUser", authUser);
         model.addAttribute("trips", tripFacade.getAllTrips());
         return "browsing/list";
     }
@@ -78,7 +78,7 @@ public class BrowsingController {
                     "Not logged in.");
             return "redirect:/auth/login";
         }
-
+        model.addAttribute("authenticatedUser", authUser);
         ReservationCreateDTO create = new ReservationCreateDTO();
         create.setDate(new Date());
         create.setUserId(authUser.getId());
@@ -109,7 +109,7 @@ public class BrowsingController {
                     "Not authorized.");
             return "redirect:/auth/login";
         }
-
+        model.addAttribute("authenticatedUser", authUser);
         LOGGER.debug("view({})", id);
         model.addAttribute("trip", reservationDTO.getTrip());
         model.addAttribute("reservation", reservationFacade.findReservationById(id));
@@ -137,9 +137,9 @@ public class BrowsingController {
                     "Not authorized.");
             return "redirect:/auth/login";
         }
-
+        
         reservationFacade.addExcursionToReservation(idRes, idExc);
-
+        model.addAttribute("authenticatedUser", authUser);
         LOGGER.debug("view({})", idRes);
         model.addAttribute("trip", reservationDTO.getTrip());
         model.addAttribute("reservation", reservationFacade.findReservationById(idRes));

@@ -29,7 +29,7 @@
                  <span class="icon-bar"></span>
                  <span class="icon-bar"></span>
              </button>
-             <a class="navbar-brand" href="${pageContext.request.contextPath}"><f:message key="navigation.project"/></a>
+             <a class="navbar-brand" href="${pageContext.request.contextPath}/"><f:message key="navigation.project"/></a>
          </div>
          <div id="navbar" class="collapse navbar-collapse">
              <ul class="nav navbar-nav">
@@ -59,11 +59,11 @@
             </c:if>
         </div>
         <!-- authenticated user info -->
-        <c:if test="${not empty authUser}">
+        <c:if test="${not empty authenticatedUser}">
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <c:out value="${authUser.name}"/> | <a href="${pageContext.request.contextPath}/auth/logout">logout</a>
+                        <c:out value="${authenticatedUser.name}"/> | <a href="${pageContext.request.contextPath}/auth/logout">logout</a>
                     </div>
                 </div>
             </div>
