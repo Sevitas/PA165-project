@@ -62,6 +62,7 @@ public class UserController {
             LOGGER.error("GET request: user/view");
             redirectAttributes.addFlashAttribute("alert_danger", "Cannot display not existing user.");
             return "redirect:/auth/logout";
+
         }
 
         UserDTO authUser = (UserDTO) req.getSession().getAttribute("authenticatedUser");

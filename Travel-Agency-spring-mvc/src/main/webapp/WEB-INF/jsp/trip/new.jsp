@@ -22,6 +22,7 @@
             <form:label path="dateFrom" cssClass="col-sm-2 control-label"><f:message key="trip.from"/></form:label>
             <div class="col-sm-10">
                 <form:input path="dateFrom" cssClass="form-control"/>
+                <form:label path="dateFrom" cssClass="help-block"><f:message key="date.format"/></form:label>
                 <form:errors path="dateFrom" cssClass="help-block"/>
             </div>
         </div>
@@ -29,6 +30,7 @@
             <form:label path="dateTo" cssClass="col-sm-2 control-label"><f:message key="trip.to"/></form:label>
             <div class="col-sm-10">
                 <form:input path="dateTo" cssClass="form-control"/>
+                <form:label path="dateTo" cssClass="help-block"><f:message key="date.format"/></form:label>
                 <form:errors path="dateTo" cssClass="help-block"/>
             </div>
         </div>

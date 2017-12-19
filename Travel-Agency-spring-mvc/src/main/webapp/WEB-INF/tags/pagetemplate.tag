@@ -37,8 +37,18 @@
                  <li class="dropdown">
                      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><f:message key="administration"/><b class="caret"></b></a>
                      <ul class="dropdown-menu">
-                         <li><my:a href="/reservation/list/all"><f:message key="reservations"/></my:a></li>
-                         <li><my:a href="/user/list"><f:message key="users"/></my:a></li>
+                        <li><my:a href="/reservation/list/all"><f:message key="reservations"/></my:a></li>
+                        <c:if test="${authenticatedUser.isAdmin}">     
+                        <li><my:a href="/user/list"><f:message key="users"/></my:a></li>
+                        </c:if>
+                        <c:if test="${!authenticatedUser.isAdmin}">
+                        <li>
+                            <a href="${pageContext.request.contextPath}/user/view/${authenticatedUser.id}">
+                            <f:message key="users"/>
+                            </a>
+                        </li>
+                        </c:if> 
+                         
                          <c:if test="${authenticatedUser.isAdmin}">
                             <li><my:a href="/trip/list"><f:message key="trips"/></my:a></li>
                             <li><my:a href="/excursion/list"><f:message key="excursions"/></my:a></li>

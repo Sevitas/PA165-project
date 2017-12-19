@@ -58,6 +58,7 @@ public class ExcursionController {
             RedirectAttributes redirectAttributes) {
         
         UserDTO authUser = (UserDTO) request.getSession().getAttribute("authenticatedUser");
+        model.addAttribute("authenticatedUser", (UserDTO) request.getSession().getAttribute("authenticatedUser"));
         if (authUser != null) {
             model.addAttribute("excursions", excursionFacade.getAllExcursions());
             return "excursion/list";
@@ -81,7 +82,7 @@ public class ExcursionController {
                          RedirectAttributes redirectAttributes, HttpServletRequest request) {
         
         UserDTO authUser = (UserDTO) request.getSession().getAttribute("authenticatedUser");
-        
+        model.addAttribute("authenticatedUser", (UserDTO) request.getSession().getAttribute("authenticatedUser"));
         if (authUser != null) {
             if (excursionFacade.getByID(id) == null) {
                 redirectAttributes.addFlashAttribute("alert_danger", "Excursion no. " + id + " does not exist");
@@ -118,7 +119,7 @@ public class ExcursionController {
         LOGGER.debug("view({})", id);
         
         UserDTO authUser = (UserDTO) request.getSession().getAttribute("authenticatedUser");
-        
+        model.addAttribute("authenticatedUser", (UserDTO) request.getSession().getAttribute("authenticatedUser"));
         if (authUser != null) {
             if (excursionFacade.getByID(id) == null) {
                 redirectAttributes.addFlashAttribute("alert_danger", "Excursion no. " + id + " doesn't exist");
@@ -145,7 +146,7 @@ public class ExcursionController {
         LOGGER.debug("new()");
         
         UserDTO authUser = (UserDTO) request.getSession().getAttribute("authenticatedUser");
-        
+        model.addAttribute("authenticatedUser", (UserDTO) request.getSession().getAttribute("authenticatedUser"));
         if (authUser != null) {
             model.addAttribute("excursion", new ExcursionDTO());
             return "excursion/new";
@@ -189,7 +190,7 @@ public class ExcursionController {
         LOGGER.debug("create(excursion={})", formBean);
         
         UserDTO authUser = (UserDTO) request.getSession().getAttribute("authenticatedUser");
-        
+        model.addAttribute("authenticatedUser", (UserDTO) request.getSession().getAttribute("authenticatedUser"));
         if (authUser != null) {
             //in case of validation error forward back to the the form
             if (bindingResult.hasErrors()) {
@@ -233,6 +234,7 @@ public class ExcursionController {
                         UriComponentsBuilder uriBuilder) {
 
         UserDTO authUser = (UserDTO) request.getSession().getAttribute("authenticatedUser");
+        model.addAttribute("authenticatedUser", (UserDTO) request.getSession().getAttribute("authenticatedUser"));
         if (authUser == null || !authUser.getIsAdmin()) {
             LOGGER.warn("Failed. Unauthorized");
             redirectAttributes.addFlashAttribute("alert_danger",
@@ -251,7 +253,7 @@ public class ExcursionController {
                 model.addAttribute(fe.getField() + "_error", true);
                 LOGGER.trace("FieldError: {}", fe);
             }
-            return "excursion/view/{id}";
+            return "redirect:{id}";
         }
         //update excursion
         formBean.setId(id);

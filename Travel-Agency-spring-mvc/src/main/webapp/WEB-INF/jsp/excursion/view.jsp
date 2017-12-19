@@ -47,6 +47,7 @@
                 <form:label path="excursionDate" cssClass="col-sm-2 control-label"><f:message key="excursion.excursionDate"/></form:label>
                 <div class="col-sm-10">
                     <form:input path="excursionDate" cssClass="form-control"/>
+                    <form:label path="excursionDate" cssClass="help-block"><f:message key="date.format"/></form:label>
                     <form:errors path="excursionDate" cssClass="help-block"/>
                 </div>
             </div>
@@ -92,8 +93,8 @@
             </tbody>
         </table>
 
-    <form method="post" action="${pageContext.request.contextPath}/excursion/resetTrips/${excursion.id}">
-        <button type="submit" class="btn btn-primary"><f:message key="excursion.reset.trips"/></button>
-    </form>
+    <!--<form method="post" action="${pageContext.request.contextPath}/excursion/resetTrips/${excursion.id}">-->
+        <!--<button type="submit" class="btn btn-primary"><f:message key="excursion.reset.trips"/></button>-->
+    <!--</form>-->
 </jsp:attribute>
 </my:pagetemplate>
